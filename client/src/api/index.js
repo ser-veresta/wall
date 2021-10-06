@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const SERVER_URI = "http://localhost:5000";
+const SERVER_URI = "https://the-wall-01.herokuapp.com";
 
 export const fetchPostsApi = () => axios.get(`${SERVER_URI}/api/post`);
 
