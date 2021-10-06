@@ -12,7 +12,10 @@ const NaveBar = () => {
   return (
     <>
       <header className="flex fixed w-full min-h-[60px] items-center justify-start py-2 bg-white shadow-md">
-        <div onClick={() => history.push("/")} className="flex-grow ml-10 text-4xl cursor-pointer">
+        <div
+          onClick={() => history.push("/")}
+          className="flex-grow ml-10 md:text-4xl sm:text-3xl text-xl cursor-pointer"
+        >
           The Wall
         </div>
         {!user?.name ? (

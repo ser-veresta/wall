@@ -21,7 +21,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="max-w-3xl m-auto flex flex-col gap-5 min-h-[calc(100vh-60px)] pb-10">
+      <div className="max-w-xs sm:max-w-sm md:max-w-screen-sm m-auto flex flex-col gap-5 min-h-[calc(100vh-60px)] pb-10">
         <section className="bg-primary-dark p-2 mt-3 rounded-md shadow-md flex gap-4 items-center justify-center">
           <IconButton className="!bg-opacity-0 px-1">
             <UserCircleIcon className="h-8 w-8" />

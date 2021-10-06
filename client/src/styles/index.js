@@ -4,8 +4,10 @@ import styled from "styled-components";
 export const Button = tw.button`
 rounded-3xl 
 bg-primary-dark 
-py-2 
-px-4 
+md:py-2 
+md:px-4
+py-1
+px-3 
 capitalize 
 tracking-tight
 hover:brightness-125

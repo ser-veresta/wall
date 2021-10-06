@@ -31,11 +31,14 @@ const Post = ({ post }) => {
       </div>
       <div className="p-2">
         <div className="flex items-end gap-2 mb-2">
-          <h4 className="text-2xl capitalize font-semibold">{post.title}</h4>
+          <h4 className="md:text-2xl text-xl capitalize font-semibold">{post.title}</h4>
           <h6 className="font-semibold text-sm text-secondary-text">
-            Posted by <span className="text-primary-text cursor-pointer hover:brightness-125">{post.createdBy}</span>
+            Posted by{" "}
+            <span className="text-primary-text text-xs sm:text-base cursor-pointer hover:brightness-125">
+              {post.createdBy}
+            </span>
           </h6>
-          <h6 className="font-semibold text-sm text-secondary-text">{moment(post.createdAt).fromNow()}</h6>
+          <h6 className="font-semibold text-xs sm:text-sm text-secondary-text">{moment(post.createdAt).fromNow()}</h6>
         </div>
         <div className="flex flex-col gap-2">
           <div className="flex gap-2">

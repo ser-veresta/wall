@@ -14,7 +14,7 @@ const Modal = () => {
         onClick={(e) => e.target.classList.contains("bg-black") && dispatch(setOpen({ open: false, type: "" }))}
         className="bg-black bg-opacity-50 absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center"
       >
-        <div className="bg-primary-light p-4 w-1/4 rounded-md shadow-sm">
+        <div className="bg-primary-light p-4 lg:w-1/4 md:w-1/3 w-2/3 rounded-md shadow-sm">
           {type === "login" && <Login />}
           {type === "register" && <Register />}
           {type === "createPost" && <CreatePost />}
