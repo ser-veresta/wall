@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import morgan from "morgan";
 import errorHandler from "./middleware/error.js";
 
 //importing the routes
@@ -20,7 +21,6 @@ app.use(cors({ origin: process.env.CLIENT_URI }));
 app.use(express.json());
 
 if (process.env.ENVIRONMENT === "dev") {
-  import morgan from "morgan";
   //setting up logger for dev env
   app.use(morgan("dev"));
 }
