@@ -4,6 +4,7 @@ import { setOpen } from "../../redux/ducks/modal";
 import CreatePost from "../CreatePost";
 import UpdatePost from "../UpdatePost";
 import Register from "../Register";
+import ForgotPassword from "../ForgotPassword";
 
 const Modal = () => {
   const { open, type } = useSelector((state) => state.modalReducer);
@@ -17,6 +18,7 @@ const Modal = () => {
         <div className="bg-primary-light p-4 lg:w-1/4 md:w-1/3 w-2/3 rounded-md shadow-sm">
           {type === "login" && <Login />}
           {type === "register" && <Register />}
+          {type === "forgotPassword" && <ForgotPassword />}
           {type === "createPost" && <CreatePost />}
           {type === "updatePost" && <UpdatePost />}
         </div>

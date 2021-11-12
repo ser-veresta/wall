@@ -18,7 +18,7 @@ const NaveBar = () => {
         >
           The Wall
         </div>
-        {!user?.name ? (
+        {!user?.username ? (
           <>
             <div className="flex items-center gap-3 mr-2">
               <Button onClick={() => dispatch(setOpen({ open: true, type: "login" }))}>login</Button>
@@ -29,7 +29,7 @@ const NaveBar = () => {
           </>
         ) : (
           <>
-            <p className="font-semibold text-xl mr-2">{user.name}</p>
+            <p className="font-semibold text-xl mr-2">{user.username}</p>
             <div className="flex items-center gap-3 mr-5">
               <Button onClick={() => dispatch(logoutUser())}>logout</Button>
             </div>

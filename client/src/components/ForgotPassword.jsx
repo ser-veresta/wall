@@ -1,35 +1,30 @@
-import { XIcon } from "@heroicons/react/outline";
-import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
-import * as yup from "yup";
 import { setOpen } from "../redux/ducks/modal";
-import { loginUser } from "../redux/ducks/user";
+import { forgotPasswordUser } from "../redux/ducks/user";
+import * as yup from "yup";
+import { useFormik } from "formik";
 import { Button, IconButton } from "../styles";
+import { XIcon } from "@heroicons/react/outline";
 import TextField from "./utils/TextField";
 
 const validationSchema = yup.object({
-  username: yup.string("Should be characters").required("Username is required"),
-  password: yup
-    .string("Should be characters")
-    .min(6, "Should be of min 6 characters.")
-    .required("Password is required"),
+  email: yup.string("Should be characters").email("Enter a valid email").required("Username is required"),
 });
 
-const Login = () => {
+const ForgotPassword = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
-    const { username, password } = values;
+    const { email } = values;
 
-    dispatch(loginUser({ username, password }));
+    dispatch(forgotPasswordUser(email));
     resetForm();
     dispatch(setOpen({ open: false, type: "" }));
   };
 
   const formik = useFormik({
     initialValues: {
-      username: "",
-      password: "",
+      email: "",
     },
     onSubmit: handleSubmit,
     validationSchema,
@@ -51,30 +46,17 @@ const Login = () => {
         autoComplete="off"
       >
         <TextField
-          name="username"
-          type="text"
+          name="email"
+          type="email"
           onChange={formik.handleChange}
-          value={formik.values.username}
-          error={formik.touched.username && formik.errors.username}
-        />
-        <TextField
-          name="password"
-          type="password"
-          onChange={formik.handleChange}
-          value={formik.values.password}
-          error={formik.touched.password && formik.errors.password}
+          value={formik.values.email}
+          error={formik.touched.email && formik.errors.email}
         />
         <p
           onClick={() => dispatch(setOpen({ open: true, type: "register" }))}
-          className="underline font-semibold w-full cursor-pointer"
-        >
-          Don't have an account?
-        </p>
-        <p
-          onClick={() => dispatch(setOpen({ open: true, type: "forgotPassword" }))}
           className="underline font-semibold w-full cursor-pointer mb-2"
         >
-          Forgot Password?
+          Don't have an account?
         </p>
         <Button className="!text-lg" type="submit">
           Submit
@@ -84,4 +66,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ForgotPassword;

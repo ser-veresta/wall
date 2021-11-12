@@ -1,9 +1,8 @@
 import * as api from "../../api";
-import { error } from "react-toastify-redux";
+import { error, success } from "react-toastify-redux";
 
 const GET_USER = "getUser";
 const LOGIN_USER = "loginUser";
-const CREATE_USER = "createUser";
 const LOGOUT_USER = "logoutUser";
 
 export const getUser = () => async (dispatch) => {
@@ -14,34 +13,62 @@ export const getUser = () => async (dispatch) => {
 
     dispatch({ type: GET_USER, payload: data });
   } catch (err) {
-    dispatch(error(err.response.data.error));
+    dispatch(error(err.response.data.error || err.message));
     dispatch(logoutUser());
   }
 };
 
-export const loginUser = (name) => async (dispatch) => {
+export const loginUser = (user) => async (dispatch) => {
   try {
-    const {
-      data: { data },
-    } = await api.loginUserApi(name);
+    const { data } = await api.loginUserApi(user);
 
-    dispatch({ type: LOGIN_USER, payload: { token: data, name } });
-  } catch (err) {
-    dispatch(error(err.response.data.error));
-  }
-};
-
-export const createUser = (name) => async (dispatch) => {
-  try {
-    const {
-      data: { data },
-    } = await api.createUserApi(name);
-
-    dispatch({ type: CREATE_USER, payload: { token: data, name } });
+    dispatch({ type: LOGIN_USER, payload: { token: data.token, username: user.username } });
   } catch (err) {
     dispatch(error(err.response.data.error || err.message));
   }
 };
+
+export const createUser = (user) => async (dispatch) => {
+  try {
+    const { data } = await api.createUserApi(user);
+
+    dispatch(success(data.message));
+  } catch (err) {
+    dispatch(error(err.response.data.error || err.message));
+  }
+};
+
+export const activateUser = (activateToken) => async (dispatch) => {
+  try {
+    const { data } = await api.activateUserApi(activateToken);
+
+    dispatch(success(data.message));
+  } catch (err) {
+    dispatch(error(err.response.data.error || err.message));
+  }
+};
+
+export const forgotPasswordUser = (email) => async (dispatch) => {
+  try {
+    const { data } = await api.forgotPasswordUserApi(email);
+
+    dispatch(success(data.message));
+  } catch (err) {
+    dispatch(error(err.response.data.error || err.message));
+  }
+};
+
+export const resetPasswordUser =
+  ({ password, resetToken }) =>
+  async (dispatch) => {
+    try {
+      const { data } = await api.resetPasswordUserApi({ resetToken, password });
+
+      dispatch(success(data.message));
+    } catch (err) {
+      dispatch(error(err.response.data.error || err.message));
+    }
+  };
 
 export const logoutUser = () => ({ type: LOGOUT_USER });
 
@@ -52,11 +79,7 @@ const reducer = (user = {}, action) => {
 
     case LOGIN_USER:
       localStorage.setItem("token", action.payload.token);
-      return { ...user, name: action.payload.name };
-
-    case CREATE_USER:
-      localStorage.setItem("token", action.payload.token);
-      return { ...user, name: action.payload.name };
+      return { ...user, username: action.payload.username };
 
     case LOGOUT_USER:
       localStorage.removeItem("token");

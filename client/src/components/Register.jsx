@@ -8,23 +8,32 @@ import { Button, IconButton } from "../styles";
 import TextField from "./utils/TextField";
 
 const validationSchema = yup.object({
-  name: yup.string("Should be characters").min(4, "Should be min of 4 characters").required("Name is required"),
+  username: yup.string().min(4, "Username should be of minimum 4 characters length").required("Username is required"),
+  email: yup.string().email("Enter a valid Email").required("Email is required"),
+  password: yup.string().min(6, "Password should be of minimum 6 characters length").required("Password is required"),
+  confirmPassword: yup
+    .string()
+    .oneOf([yup.ref("password")], "Password must match")
+    .required("Confirm your password"),
 });
 
 const Register = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
-    const { name } = values;
+    const { username, password, email } = values;
 
-    dispatch(createUser(name));
+    dispatch(createUser({ username, email, password }));
     resetForm();
     dispatch(setOpen({ open: false, type: "" }));
   };
 
   const formik = useFormik({
     initialValues: {
-      name: "",
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
     },
     onSubmit: handleSubmit,
     validationSchema,
@@ -46,12 +55,39 @@ const Register = () => {
         autoComplete="off"
       >
         <TextField
-          name="name"
-          type="name"
+          name="username"
+          type="text"
           onChange={formik.handleChange}
-          value={formik.values.name}
-          error={formik.touched.name && formik.errors.name}
+          value={formik.values.username}
+          error={formik.touched.username && formik.errors.username}
         />
+        <TextField
+          name="email"
+          type="email"
+          onChange={formik.handleChange}
+          value={formik.values.email}
+          error={formik.touched.email && formik.errors.email}
+        />
+        <TextField
+          name="password"
+          type="password"
+          onChange={formik.handleChange}
+          value={formik.values.password}
+          error={formik.touched.password && formik.errors.password}
+        />
+        <TextField
+          name="confirmPassword"
+          type="password"
+          onChange={formik.handleChange}
+          value={formik.values.confirmPassword}
+          error={formik.touched.confirmPassword && formik.errors.confirmPassword}
+        />
+        <p
+          onClick={() => dispatch(setOpen({ open: true, type: "login" }))}
+          className="underline font-semibold w-full cursor-pointer mb-2"
+        >
+          Already have an account?
+        </p>
         <Button className="!text-lg" type="submit">
           Submit
         </Button>

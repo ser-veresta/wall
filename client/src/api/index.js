@@ -25,6 +25,13 @@ export const deletePostApi = (id) =>
 export const getUserApi = () =>
   axios.get(`${SERVER_URI}/api/user`, { headers: { authorization: localStorage.getItem("token") } });
 
-export const loginUserApi = (name) => axios.post(`${SERVER_URI}/api/user/`, { name });
+export const loginUserApi = (user) => axios.post(`${SERVER_URI}/api/user/login`, user);
 
-export const createUserApi = (name) => axios.post(`${SERVER_URI}/api/user/create`, { name });
+export const createUserApi = (user) => axios.post(`${SERVER_URI}/api/user/create`, user);
+
+export const activateUserApi = (activateToken) => axios.get(`${SERVER_URI}/api/user/activate/${activateToken}`);
+
+export const forgotPasswordUserApi = (email) => axios.post(`${SERVER_URI}/api/user/forgotPassword`, { email });
+
+export const resetPasswordUserApi = ({ resetToken, password }) =>
+  axios.patch(`${SERVER_URI}/api/user/resetPassword/${resetToken}`, { password });

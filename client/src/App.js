@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import Activate from "./pages/Activate";
+import ResetPassword from "./pages/ResetPassword";
 import NaveBar from "./components/NaveBar";
 import Modal from "./components/utils/Modal";
 import { useSelector } from "react-redux";
@@ -15,6 +17,8 @@ function App() {
         <NaveBar />
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route path="/activate/:activateToken" component={Activate} />
+          <Route path="/resetPassword/:resetToken" component={ResetPassword} />
         </Switch>
         <Footer />
       </Router>
