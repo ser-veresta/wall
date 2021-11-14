@@ -44,6 +44,11 @@ const Login = () => {
         <XIcon className="w-7 h-7" />
       </IconButton>
       <h3 className="text-3xl text-center mt-3">Login</h3>
+      <div className="p-6 bg-gray-200 flex flex-col rounded-lg">
+        <p>Test User</p>
+        <p>username: test</p>
+        <p>password: 123123</p>
+      </div>
       <form
         className="flex flex-col gap-3 mt-3 w-10/12 m-auto justify-center items-center"
         onSubmit={formik.handleSubmit}
