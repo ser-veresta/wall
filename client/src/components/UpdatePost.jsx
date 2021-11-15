@@ -69,7 +69,7 @@ const UpdatePost = () => {
           error={formik.touched.message && formik.errors.message}
         />
         <TextField
-          name="tags"
+          name="tags-Example: test,help,123"
           onChange={formik.handleChange}
           value={formik.values.tags}
           error={formik.touched.tags && formik.errors.tags}
