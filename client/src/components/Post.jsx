@@ -14,7 +14,7 @@ const Post = ({ post }) => {
     <section className="bg-primary-dark flex items-start rounded-md shadow-md">
       <div className="p-2 flex flex-col items-center">
         <IconButton onClick={() => dispatch(likePost(post._id, "incre"))}>
-          {!post.voteId?.incre.includes(user.name) ? (
+          {!post.voteId?.incre.includes(user.username) ? (
             <ArrowCircleUpIcon className="h-7 w-7" />
           ) : (
             <ArrowSolidUp className="h-7 w-7" />
@@ -22,7 +22,7 @@ const Post = ({ post }) => {
         </IconButton>
         <p className={post.vote < 0 ? "text-lg text-red-700" : "text-lg"}>{Math.abs(post.vote)}</p>
         <IconButton onClick={() => dispatch(likePost(post._id, "decre"))}>
-          {!post.voteId?.decre.includes(user.name) ? (
+          {!post.voteId?.decre.includes(user.username) ? (
             <ArrowCircleDownIcon className="h-7 w-7" />
           ) : (
             <ArrowSolidDown className="h-7 w-7" />
@@ -58,7 +58,7 @@ const Post = ({ post }) => {
             </div>
           )}
         </div>
-        {post.createdBy === user.name && (
+        {post.createdBy === user.username && (
           <div className="h-7 flex gap-4 items-start my-2 ml-6">
             <IconButton onClick={() => dispatch(deletePost(post._id))}>
               <TrashIcon className="w-7 h-7" />

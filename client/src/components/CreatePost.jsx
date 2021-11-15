@@ -26,7 +26,7 @@ const CreatePost = () => {
       message,
       tags: tags.split(","),
       image,
-      createdBy: user.name,
+      createdBy: user.username,
       createdAt: new Date(),
     };
 

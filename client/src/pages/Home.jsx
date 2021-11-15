@@ -27,13 +27,13 @@ const Home = () => {
             <UserCircleIcon className="h-8 w-8" />
           </IconButton>
           <button
-            disabled={!user.name}
+            disabled={!user.username}
             onClick={() => {
               dispatch(setOpen({ open: true, type: "createPost" }));
             }}
             className="w-9/12 py-2 px-4 capitalize rounded-[5px] text-left text-primary-text font-semibold bg-gray-50 cursor-text flex-grow mr-5"
           >
-            {!user.name ? "login to create posts" : "create post"}
+            {!user.username ? "login to create posts" : "create post"}
           </button>
         </section>
         {posts.map((ele, i) => (

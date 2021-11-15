@@ -58,7 +58,7 @@ export const updatePost = async (req, res, next) => {
 export const likePost = async (req, res, next) => {
   const { id } = req.params;
   const { type } = req.body;
-  const { name } = req.body.user;
+  const { username: name } = req.body.user;
 
   try {
     const post = await Posts.findById(id);
